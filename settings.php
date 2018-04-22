@@ -1,16 +1,24 @@
 <?php
 session_start();
-define('SITE_URL', 'http://php4/');
+define('SITE_URL', 'http://php8/');
 
 include 'functions.php';
 
-if(isset($_GET['id']) && $_GET['id'] !=0) {
-    $article_id = (int)$_GET['id'];
-    $article = getArticle($article_id);
+//получаем запись по id
+if(isset($_GET['id'])){
+	$article_id = (int)$_GET['id'];
+	$article = getArticle($article_id);
 }
 
-if(isset($_GET['searchText']) && $_GET['searchText'] !='') {
-    $search = getArticleSearch($_GET['searchText']);
+//Если существует id категории, то получаем все записи из этой категории
+if(isset($_GET['cat_id'])){
+    $cat_id = (int)$_GET['cat_id'];
+    $articlesByCatId = getArticlesByCategory($cat_id);
+}
+
+if(isset($_GET['query'])){
+    $query = strip_tags(htmlspecialchars(trim($_GET['query'])));
+    $findedArticles = findArticles($query);
 }
 
 //Установка локали и даты
@@ -28,28 +36,37 @@ elseif ($hour >= 6 and $hour < 12):
 elseif ($hour >= 12 and $hour < 18):
     $welcome = "Добрый день";
 elseif ($hour >= 18 and $hour < 24):
-    $welcome = "Добрый вечер";
+    $welcome =  "Добрый вечер";
 endif;
 
-$sidebarMenu = getSideBar();
-/*
-$sidebarMenu = [
-    'HTML' => "#",
-    'PHP' => '#',
-    'JavaScript' => '#',
-];
-*/
-if($_GET['category_id']==0) {
-    $rows = getAllArticles();
-} else {
-    $rows = getCategoryArticles($_GET['category_id']);
-}
+// сколько записей выводить на странице
+$itemOnPage = 5;
+
+//получаем все записи
+$articles = getAllArticles();
+//получаем все категории
+$categories = getAllCategories();
+// получаем всех пользователей
+$users = getAllUsers();
 
 $mainMenu = [
     'Главная' => SITE_URL,
-    'Статьи' => '#',
-    'Услуги' => '#',
     'Контакты' => '#',
     'Гостевая книга' => '/guestbook/',
     'Онлайн тест' => '/test/',
 ];
+
+if(!isLogin() && isset($_COOKIE['hash']) && $_COOKIE['hash'] != ''){
+    $sql = "SELECT * FROM users WHERE hash = '{$_COOKIE['hash']}'";
+    $res = mysqli_query($link, $sql);
+    if(mysqli_num_rows($res) > 0){
+        $user = mysqli_fetch_assoc($res);
+        $_SESSION['USER_LOGGED_IN'] = 1;
+        $_SESSION['USER_LOGIN'] = $user['login'];
+        $_SESSION['USER_ROLE'] = $user['role'];
+        $hash = generateCookieHash();
+        setcookie('hash', $hash, time() + 3600 * 24 * 7, '/');
+        $sql = "UPDATE users SET hash = '{$hash}' WHERE login = '{$login}'";
+        mysqli_query($link, $sql);
+    }
+}

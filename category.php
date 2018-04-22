@@ -27,18 +27,23 @@
             <small>Cейчас <?= $date?></small>
             <hr>
 
-			<div class="row">
-                <div class="col-md-12">
-                    <a href="#">
-                        <img class="img-fluid rounded mb-3 mb-md-0" src="upload/images/<?=$article['image'];?>" alt="">
-                    </a>
+            <?php foreach($articlesByCatId as $row): ?>
+                <div class="row">
+                    <div class="col-md-4">
+                        <a href="#">
+                            <img class="img-fluid rounded mb-3 mb-md-0" src="upload/images/<?=$row['image'];?>" alt="">
+                        </a>
+                    </div>
+                    <div class="col-md-8">
+                        <h3><?=$row['title'];?></h3>
+                        <p><?=$row['introtext'];?></p>
+                        <!-- Формируем ссылочку для GET запроса -->
+                        <a class="btn btn-primary" href="/article.php?id=<?=$row['id'];?>">Читать далее</a>
+                    </div>
                 </div>
-                <div class="col-md-12">
-                    <h3><?=$article['title'];?></h3>
-                    <p><?=$article['full_text'];?></p>
-                </div>
-            </div>
-			<hr>
+                <hr>
+            <?php endforeach;?>
+
 
         </div>
 

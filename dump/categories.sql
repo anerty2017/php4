@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Апр 07 2018 г., 21:13
+-- Время создания: Апр 06 2018 г., 14:42
 -- Версия сервера: 5.6.38
 -- Версия PHP: 5.5.38
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `categories` (
-  `id` int(11) NOT NULL,
+  `cat_id` int(11) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
   `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -38,10 +38,10 @@ CREATE TABLE `categories` (
 -- Дамп данных таблицы `categories`
 --
 
-INSERT INTO `categories` (`id`, `name`, `description`) VALUES
-(1, 'HTML', 'Язык разметки HTML'),
-(2, 'PHP', 'Сервисный язык программирования PHP'),
-(3, 'JavaScript', 'Язык программирования JavaScript');
+INSERT INTO `categories` (`cat_id`, `name`, `description`) VALUES
+(1, 'Советы', 'Полезные советы автомобилистам по вождению автомобиля и уходу за ним.'),
+(2, 'Устройство', 'Устройство и ремонт автомобиля'),
+(3, 'Новости', 'Автомобильные новости России и мира, тест-драйвы автомобилей, обзоры гоночных соревнований, репортажи с автосалонов, фото и видео новых машин');
 
 --
 -- Индексы сохранённых таблиц
@@ -51,7 +51,7 @@ INSERT INTO `categories` (`id`, `name`, `description`) VALUES
 -- Индексы таблицы `categories`
 --
 ALTER TABLE `categories`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`cat_id`);
 
 --
 -- AUTO_INCREMENT для сохранённых таблиц
@@ -61,7 +61,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT для таблицы `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `cat_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

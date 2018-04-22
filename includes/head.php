@@ -10,3 +10,6 @@
 
 <!-- Custom styles for this template -->
 <link href="<?=SITE_URL?>css/main.css" rel="stylesheet">
+
+<!-- Fonts Awesome -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">

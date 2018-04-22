@@ -1,9 +1,10 @@
 <? include 'settings.php';?>
+
 <!DOCTYPE html>
 <html lang="ru">
 
 <head>
-    <? include_once 'includes/head.php' ?>
+    <? include_once 'includes/head.php'; ?>
 </head>
 
 <body>
@@ -18,7 +19,7 @@
         <div class="col-md-9">
 
             <!-- Page Heading -->
-            <h1 class="my-4">Заголовок страницы
+            <h1 class="my-4">Резуьтаты поиска
                 <small></small>
             </h1>
             <hr>
@@ -26,25 +27,26 @@
             <small>Cейчас <?= $date?></small>
             <hr>
 
-            <p>Найдено: <?=count($search);?> результата</p>
-            <hr>
-            <?php
-            if($search!=''){
-                foreach ($search as $row): ?>
+            <? if(is_array($findedArticles)): ?>
+                <? foreach($findedArticles as $row): ?>
                     <div class="row">
                         <div class="col-md-4">
                             <a href="#">
-                                <img class="img-fluid rounded mb-3 mb-md-0" src="/img/<?=$row['image'];?>" alt="">
+                                <img class="img-fluid rounded mb-3 mb-md-0" src="upload/images/<?=$row['image'];?>" alt="">
                             </a>
                         </div>
                         <div class="col-md-8">
                             <h3><?=$row['title'];?></h3>
                             <p><?=$row['introtext'];?></p>
+                            <!-- Формируем ссылочку для GET запроса -->
                             <a class="btn btn-primary" href="/article.php?id=<?=$row['id'];?>">Читать далее</a>
                         </div>
-                    </div> 
+                    </div>
                     <hr>
-            <?php endforeach;}?>
+                <? endforeach;?>
+            <?else:?>
+                <i><?=$findedArticles ?></i>
+            <?endif;?>
         </div>
 
         <!-- Sidebar -->
