@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Апр 17 2018 г., 18:48
--- Версия сервера: 5.7.20
--- Версия PHP: 7.0.26
+-- Время создания: Апр 22 2018 г., 22:02
+-- Версия сервера: 5.6.38
+-- Версия PHP: 5.5.38
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -42,7 +42,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `login`, `email`, `password`, `hash`, `role`) VALUES
-(1, 'airat', 'airat.mufazalov@yandex.ru', '9853c06281b96783c6dcf7d4bb4127d9', 'c5f5c23be1b71adb51ea9dc8e9d444a8', 0);
+(1, 'airat', 'airat.mufazalov@yandex.ru', '9853c06281b96783c6dcf7d4bb4127d9', 'c5f5c23be1b71adb51ea9dc8e9d444a8', 0),
+(2, 'olga', 'olga@mail.ru', '6bba87d912cd54c80eb07aa5809d95ac', '618790ae971abb5610b16c826fb72d01', 0);
 
 --
 -- Индексы сохранённых таблиц
@@ -62,7 +63,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
